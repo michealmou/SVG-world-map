@@ -126,7 +126,7 @@ if (zoomin) {
             zoom += zoomstep;
             map.style.transform = "scale(" + zoom + ")";
         });
-}
+})};
 
 if (zoomout) {
     zoomout.addEventListener("click", function () {
