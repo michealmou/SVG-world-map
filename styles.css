@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.map-container {
+    flex: 1;
+    background-color: white;
+    overflow: auto;
+    margin-top: 95px;
+}
+
+.map-container svg {
+    width: 100%;
+    height: auto;
+}
+
+.side-panel {
+    width: 300px;
+    background-color: white;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    overflow-y: auto;
+    display: none;
+}
+
+.side-panel.active {
+    display: block;
+}
+
+.close-btn {
+    float: right;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.country-info {
+    margin-top: 20px;
+}
+
+.country-info img {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.controls button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.controls button:hover {
+    background-color: #f0f0f0;
+}
+
+path:hover {
+    fill: #5f5d55;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+p {
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
