@@ -1,1 +1,7 @@
 ZOOM_GUIDE.txt
+ZOOM_IMPLEMENTATION.txt
+PAN_IMPLEMENTATION.txt
+CUSTOM_DATA_GUIDE.txt
+customCountries.json
+customData.json
+*.local.json

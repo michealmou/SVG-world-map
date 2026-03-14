@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     position: relative;
 }
 
@@ -15,14 +15,7 @@ body {
     height: 100vh;
 }
 
-.map-container {
-    flex: 1;
-    background-color: white;
-    overflow: auto;
-    margin-top: 95px;
-}
-
-.map-container svg {
+.mapsvg {
     width: 100%;
     height: auto;
 }
@@ -33,11 +26,61 @@ body {
     border-left: 1px solid #ddd;
     padding: 20px;
     overflow-y: auto;
-    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 10;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+    visibility: hidden;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .side-panel.active {
-    display: block;
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Backdrop overlay when panel is open */
+.side-panel.active::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    animation: fadeInBackdrop 0.4s ease;
+}
+
+@keyframes fadeInBackdrop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Smooth fade-in animation for country info */
+.country-info {
+    margin-top: 20px;
+    animation: slideInContent 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideInContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .close-btn {
@@ -46,6 +89,14 @@ body {
     border: none;
     background: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.close-btn:hover {
+    background-color: #f0f0f0;
+    transform: rotate(90deg);
 }
 
 .country-info {
@@ -55,6 +106,59 @@ body {
 .country-info img {
     width: 100%;
     margin: 10px 0;
+    border-radius: 8px;
+    animation: scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.country-info h2 {
+    animation: slideInText 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.country-info p {
+    animation: slideInText 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    padding: 10px 0;
+}
+
+.area {
+    animation-delay: 0.3s;
+}
+
+.capital {
+    animation-delay: 0.4s;
+}
+
+.population {
+    animation-delay: 0.5s;
+}
+
+.region {
+    animation-delay: 0.6s;
+}
+
+.description {
+    animation-delay: 0.7s;
+}
+
+@keyframes slideInText {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .controls {
@@ -80,6 +184,12 @@ body {
 
 path:hover {
     fill: #5f5d55;
+    transition: fill 0.3s ease;
+}
+
+path {
+    transition: fill 0.3s ease;
+    cursor: pointer;
 }
 
 .header {
@@ -93,4 +203,49 @@ p {
     padding: 20px;
     text-align: center;
     font-size: 18px;
+}
+
+.svg-wrapper{
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    width: 100%;
+    cursor: grab;
+    background-color: rgb(126, 208, 234);
+}
+
+.svg-wrapper.panning {
+    cursor: grabbing;
+    transition: none; /* Disable transition while panning for smoother experience */
+}
+
+.map-container{
+    flex: 1;
+    background-color: white;
+    overflow: hidden;
+    margin-top: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none; /* Prevent text selection while panning */
+}
+
+.controls button{
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controls button:hover{
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+.controls button:active{
+    background-color: #e0e0e0;
+    transform: scale(0.95);
 }
